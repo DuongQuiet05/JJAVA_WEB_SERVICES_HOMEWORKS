@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Danh sách lịch chiếu</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h1>Danh sách lịch chiếu</h1>
+<form method="get" th:action="@{/showtimes}">
+  <label>Phim:</label>
+  <select name="movieId">
+    <option value="">Tất cả</option>
+    <option th:each="movie : ${movies}"
+            th:value="${movie.id}"
+            th:selected="${movie.id == selectedMovieId}"
+            th:text="${movie.title}"></option>
+  </select>
+
+  <label>Ngày:</label>
+  <input type="date" name="date" th:value="${selectedDate}"/>
+
+  <label>Rạp:</label>
+  <select name="theaterId">
+    <option value="">Tất cả</option>
+    <option th:each="theater : ${theaters}"
+            th:value="${theater.id}"
+            th:selected="${theater.id == selectedTheaterId}"
+            th:text="${theater.name}"></option>
+  </select>
+
+  <label>Phòng chiếu:</label>
+  <select name="screenRoomId">
+    <option value="">Tất cả</option>
+    <option th:each="room : ${screenRooms}"
+            th:value="${room.id}"
+            th:selected="${room.id == selectedScreenRoomId}"
+            th:text="${room.name}"></option>
+  </select>
+
+  <button type="submit">Lọc</button>
+</form>
+
+<a th:href="@{/showtimes/add}">Thêm lịch chiếu mới</a>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Phim</th>
+    <th>Phòng chiếu</th>
+    <th>Bắt đầu</th>
+    <th>Kết thúc</th>
+    <th>Số ghế trống</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="showtime : ${showtimes}">
+    <td th:text="${showtime.id}"></td>
+    <td th:text="${showtime.movie.title}"></td>
+    <td th:text="${showtime.screenRoom.name}"></td>
+    <td th:text="${showtime.startTime}"></td>
+    <td th:text="${showtime.endTime}"></td>
+    <td th:text="${showtime.numberSeatEmpty}"></td>
+    <td>
+      <a th:href="@{/showtimes/edit/{id}(id=${showtime.id})}">Sửa</a>
+      <form th:action="@{/showtimes/delete/{id}(id=${showtime.id})}" method="post" style="display:inline;">
+        <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

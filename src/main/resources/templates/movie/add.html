@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm phim mới</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Thêm phim mới</h1>
+
+<form th:action="@{/movies/add}" method="post">
+    <label>Title:</label>
+    <input type="text" name="title" required><br>
+
+    <label>Genre:</label>
+    <input type="text" name="genre" required><br>
+
+    <label>Duration (phút):</label>
+    <input type="number" name="duration" required><br>
+
+    <button type="submit">Lưu</button>
+</form>
+
+<a th:href="@{/movies}">Quay lại danh sách</a>
+
+</body>
+</html>
