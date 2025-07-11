@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<h1>Index</h1>
+<a th:href="@{/employees}">employees</a>
+<a th:href="@{/hw01}">hw01</a>
+<p>hw02: Tạo một project Spring Boot Web để quản lý thông tin nhân viên.</p>
+<ul> hw03:
+    <li>Tạo một entity Employee với các thuộc tính id, name, email , phoneNumber , salary và created_at.</li>
+    <li>Tạo một interface EmployeeRepository kế thừa JpaRepository.</li>
+    <li>Định nghĩa phương thức findByPhoneNumber(String phone) để tìm nhân viên theo số điện thoại.</li>
+</ul>
+
+<p>hw04: Thêm phương thức @Query("SELECT e FROM Employee e WHERE e.salary > :salary") để tìm nhân viên có lương lớn hơn một giá trị nhất định.</p>
+
+<p>hw05: Sử dụng phương thức findAll(Pageable pageable) để lấy danh sách sản phẩm theo phân trang và sắp xếp.</p>
+
+<ul>
+    hw06:
+    <li>Tạo một DTO class EmployeeDTO với các thuộc tính cần thiết , không lấy những thuộc tính không sử dụng đến để tránh dư thừa và giảm tải dữ liệu trả về .</li>
+    <li>Tạo phương thức trong EmployeeRepository sử dụng annotation @Query  custom query để trả về đối tượng EmployeeDTO với những thuộc tính cần thiết .</li>
+</ul>
+
+<ul>
+    hw07
+    <li>Tạo một interface EmployeeInfo với các phương thức getName() , getPhone()  và getSalary().</li>
+    <li>Tạo phương thức trong Employeepository để trả về danh sách các đối tượng EmployeeInfo .</li>
+</ul>
+
+<p>hw08: Xây dựng controller có các endpoint cho CRUD operations cho entity Employee.</p>
+
+<p>hw09: hiển thị danh sách, tìm kiếm, sắp xếp mặc định, phân trang, thêm mới
+</p>
+
+<p>hw10: sửa và xóa</p>
+</body>
+</html>

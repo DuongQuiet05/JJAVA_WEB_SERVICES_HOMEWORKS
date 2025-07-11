@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+</head>
+<body>
+<h1>add new employee</h1>
+<form th:href="@{/employees/add}" method="post" th:object="${createDTO}">
+    <label>
+        name:
+        <input type="text" th:field="*{name}">
+    </label>
+
+    <label>
+        email:
+        <input type="text" th:field="*{email}">
+    </label>
+
+    <label>
+        phone:
+        <input type="text" th:field="*{phone}">
+    </label>
+
+    <label>
+        salary:
+        <input type="text" th:field="*{salary}">
+    </label>
+
+    <button type="submit">save</button>
+</form>
+</body>
+</html>
