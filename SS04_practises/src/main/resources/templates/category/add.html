@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/categories/add}" method="post" th:object="${createDTO}">
+    <label >
+        <input type="text" th:field="*{name}">
+        <button type="submit">add</button>
+    </label>
+</form>
+</body>
+</html>

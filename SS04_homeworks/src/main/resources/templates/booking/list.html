@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Your Bookings</h2>
+<table border="1">
+  <tr>
+    <th>Flight No</th><th>From</th><th>To</th><th>Price</th>
+    <th>Name</th><th>Phone</th><th>Time</th><th>Status</th><th>Action</th>
+  </tr>
+  <tr th:each="b : ${bookings}">
+    <td th:text="${b.flightNumber}"></td>
+    <td th:text="${b.departure}"></td>
+    <td th:text="${b.destination}"></td>
+    <td th:text="${b.price}"></td>
+    <td th:text="${b.customerName}"></td>
+    <td th:text="${b.customerPhone}"></td>
+    <td th:text="${#temporals.format(b.bookingTime, 'yyyy-MM-dd HH:mm')}"></td>
+    <td th:text="${b.status}"></td>
+    <td>
+      <a th:href="@{/bookings/cancel/{id}(id=${b.id}, phone=${b.customerPhone})}"
+         th:if="${b.status.name() == 'BOOKED'}">Cancel</a>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

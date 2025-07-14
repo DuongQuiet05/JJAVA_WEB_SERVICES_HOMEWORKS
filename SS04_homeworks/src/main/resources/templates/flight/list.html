@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/flights}" method="get">
+    <input type="text" name="departure" th:value="${departure}" placeholder="Departure">
+    <input type="text" name="destination" th:value="${destination}" placeholder="Destination">
+    <button type="submit">Search</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Flight No</th><th>From</th><th>To</th><th>Price</th><th>Action</th>
+    </tr>
+    <tr th:each="f : ${flights}">
+        <td th:text="${f.flightNumber}"></td>
+        <td th:text="${f.departure}"></td>
+        <td th:text="${f.destination}"></td>
+        <td th:text="${f.price}"></td>
+        <td><a th:href="@{/bookings/new/{id}(id=${f.id})}">Book</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

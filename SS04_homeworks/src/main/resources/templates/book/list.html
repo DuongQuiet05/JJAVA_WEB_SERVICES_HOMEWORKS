@@ -1,0 +1,37 @@
+<form th:action="@{/books}" method="get">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Search title...">
+    <button type="submit">Search</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th><th>Title</th><th>Author</th><th>Publisher</th><th>Year</th><th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${bookPage.content}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publisher}"></td>
+        <td th:text="${book.year}"></td>
+        <td>
+            <a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
+            <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post" style="display:inline">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <span th:text="'Page ' + ${bookPage.number + 1} + ' of ' + ${bookPage.totalPages}"></span>
+    <div>
+        <a th:if="${bookPage.hasPrevious()}" th:href="@{/books(page=${bookPage.number - 1}, keyword=${keyword})}">Previous</a>
+        <a th:if="${bookPage.hasNext()}" th:href="@{/books(page=${bookPage.number + 1}, keyword=${keyword})}">Next</a>
+    </div>
+</div>
+
+<a th:href="@{/books/add}">Add new book</a>

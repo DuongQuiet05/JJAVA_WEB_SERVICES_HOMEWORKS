@@ -1,0 +1,41 @@
+<form th:action="@{/foods}" method="get">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo tên">
+    <select name="categoryId">
+        <option value="">Tất cả danh mục</option>
+        <option th:each="c : ${categories}" th:value="${c.id}"
+                th:text="${c.categoryName}"
+                th:selected="${c.id == categoryId}"></option>
+    </select>
+    <button type="submit">Lọc</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Expiration</th><th>Actions</th>
+    </tr>
+    <tr th:each="f : ${foodPage.content}">
+        <td th:text="${f.id}"></td>
+        <td th:text="${f.name}"></td>
+        <td th:text="${f.category.categoryName}"></td>
+        <td th:text="${f.price}"></td>
+        <td th:text="${f.expirationDate}"></td>
+        <td>
+            <a th:href="@{/foods/edit/{id}(id=${f.id})}">Edit</a>
+            <form th:action="@{/foods/delete/{id}(id=${f.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/foods/add}">Thêm mới</a>
+
+<div>
+    <span th:text="'Page ' + ${foodPage.number + 1} + '/' + ${foodPage.totalPages}"></span>
+    <div>
+        <a th:if="${foodPage.hasPrevious()}"
+           th:href="@{/foods(page=${foodPage.number - 1}, keyword=${keyword}, categoryId=${categoryId})}">Previous</a>
+        <a th:if="${foodPage.hasNext()}"
+           th:href="@{/foods(page=${foodPage.number + 1}, keyword=${keyword}, categoryId=${categoryId})}">Next</a>
+    </div>
+</div>
